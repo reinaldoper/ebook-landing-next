@@ -4,5 +4,5 @@ export const PRICE_NOW = "37,90";
 export const PRICE_NOW_NUMERIC = "37.90";
 export const CURRENCY = "BRL";
 // Replace with the real production domain before deploying.
-export const SITE_URL = "https://eletricaindustrial.com.br";
+export const SITE_URL = "https://dossantossistemas.com.br";
 export const CONTACT_EMAIL = "dossantossistemas@gmail.com";
