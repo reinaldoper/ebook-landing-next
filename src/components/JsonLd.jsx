@@ -22,17 +22,51 @@ const productSchema = {
   category: "E-book técnico / Educação profissional",
   offers: {
     "@type": "Offer",
-    // "price" (or priceSpecification.price) is required by Google — this
-    // resolves the "critical" Merchant/Product rich-result error.
+    
     price: PRICE_NOW_NUMERIC,
     priceCurrency: CURRENCY,
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
     url: CTA_LINK,
+   
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "BR",
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 7,
+      returnMethod: "https://schema.org/ReturnByMail",
+      returnFees: "https://schema.org/FreeReturn",
+    },
+    
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: CURRENCY,
+      },
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "BR",
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 0,
+          unitCode: "DAY",
+        },
+        transitTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 0,
+          unitCode: "DAY",
+        },
+      },
+    },
   },
-  // "aggregateRating" (fixes the non-critical warning). Derived directly
-  // from the testimonials actually shown on the page — keep in sync with
-  // src/data/testimonials.js.
+  
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: avgRating.toFixed(1),
@@ -40,9 +74,7 @@ const productSchema = {
     worstRating: "1",
     reviewCount: TESTIMONIALS.length,
   },
-  // "review" (fixes the non-critical warning). Mirrors the visible
-  // testimonials section 1:1 — Google requires review markup to match
-  // content that is actually visible to users on the page.
+  
   review: TESTIMONIALS.map((t) => ({
     "@type": "Review",
     author: { "@type": "Person", name: t.name },
